@@ -1,0 +1,1946 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TribalCraft - Empowering Tribal Artisans Worldwide</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D2691E;
+            --accent-color: #FF6B35;
+            --dark-color: #1A0E08;
+            --light-bg: #FFF8F3;
+            --success-color: #28A745;
+            --warning-color: #FFC107;
+            --info-color: #17A2B8;
+            --danger-color: #DC3545;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none !important;
+        }
+        a:hover {
+            text-decoration: none !important;
+        }
+
+        .navbar {
+            background: rgba(26, 14, 8, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar.scrolled { padding: 0.5rem 0; background: rgba(26, 14, 8, 0.98); }
+        .navbar-brand {
+            font-weight: 700; font-size: 1.8rem; color: white !important;
+            display: flex; align-items: center; gap: 10px; transition: transform 0.3s ease;
+        }
+        .navbar-brand:hover { transform: scale(1.05); }
+        .navbar-brand i {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2rem;
+        }
+        .nav-link {
+            color: rgba(255,255,255,0.9) !important; font-weight: 500; margin: 0 10px;
+            position: relative; transition: all 0.3s ease; padding: 8px 16px !important; border-radius: 25px;
+        }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -2px; left: 50%; width: 0; height: 2px;
+            background: var(--gradient-1); transition: all 0.3s ease; transform: translateX(-50%);
+        }
+        .nav-link:hover::after { width: 80%; }
+        .nav-link:hover { color: white !important; background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+        .hero-section {
+            background: linear-gradient(135deg, rgba(26, 14, 8, 0.9), rgba(139, 69, 19, 0.8)), 
+                        url('https://picsum.photos/seed/tribal-hero/1920/600') center/cover;
+            color: white; padding: 150px 0 100px; text-align: center; position: relative; overflow: hidden;
+        }
+        .hero-section::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 200%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 8s infinite;
+        }
+        @keyframes shimmer { 0% { left: -100%; } 100% { left: 100%; } }
+        .hero-title { font-size: 3.5rem; font-weight: 700; margin-bottom: 1.5rem; animation: fadeInUp 1s ease-out; }
+        .hero-subtitle { font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.95; animation: fadeInUp 1s ease-out 0.2s both; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .hero-buttons { animation: fadeInUp 1s ease-out 0.4s both; }
+        .btn-hero {
+            padding: 15px 40px; font-size: 1.1rem; font-weight: 600; border-radius: 50px;
+            text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease;
+            margin: 0 10px; position: relative; overflow: hidden;
+        }
+        .btn-hero::before {
+            content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0;
+            border-radius: 50%; background: rgba(255,255,255,0.3); transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        .btn-hero:hover::before { width: 300px; height: 300px; }
+        .btn-hero-primary { background: var(--gradient-1); color: white; border: none; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3); }
+        .btn-hero-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4); }
+        .btn-hero-outline { background: transparent; color: white; border: 2px solid white; }
+        .btn-hero-outline:hover { background: white; color: var(--primary-color); transform: translateY(-3px); }
+
+        .product-card {
+            border: none; border-radius: 20px; overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow-md); height: 100%; display: flex; flex-direction: column;
+            background: white; position: relative;
+        }
+        .product-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+            background: var(--gradient-1); transform: scaleX(0); transition: transform 0.3s ease;
+        }
+        .product-card:hover::before { transform: scaleX(1); }
+        .product-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: var(--shadow-xl); }
+        .product-image-container { position: relative; overflow: hidden; height: 280px; }
+        .product-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .product-card:hover .product-image { transform: scale(1.1); }
+        .product-overlay {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+            opacity: 0; transition: opacity 0.3s ease; display: flex; align-items: flex-end; padding: 20px;
+        }
+        .product-card:hover .product-overlay { opacity: 1; }
+        .product-badge {
+            position: absolute; top: 15px; right: 15px; background: var(--gradient-1);
+            color: white; padding: 8px 16px; border-radius: 25px; font-size: 0.85rem;
+            font-weight: 600; box-shadow: var(--shadow-md); z-index: 10; animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        .product-body { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .product-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 10px; color: var(--dark-color); }
+        .product-artisan { color: #6c757d; font-size: 0.9rem; margin-bottom: 15px; }
+        .product-description { color: #495057; font-size: 0.95rem; margin-bottom: 20px; flex-grow: 1; }
+        .product-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 15px; border-top: 1px solid #e9ecef; }
+        .product-price { font-size: 1.5rem; font-weight: 700; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .btn-add-cart {
+            background: var(--gradient-3); color: white; border: none; padding: 10px 25px;
+            border-radius: 25px; font-weight: 600; transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .btn-add-cart:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3); }
+
+        .dashboard-card {
+            background: white; border-radius: 20px; padding: 30px; box-shadow: var(--shadow-md);
+            transition: all 0.3s ease; margin-bottom: 25px; position: relative; overflow: hidden;
+        }
+        .dashboard-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--gradient-1); }
+        .dashboard-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-xl); }
+        
+        .stat-card {
+            background: white; border-radius: 20px; padding: 30px; text-align: center;
+            transition: all 0.3s ease; box-shadow: var(--shadow-md); position: relative; overflow: hidden;
+        }
+        .stat-card::before {
+            content: ''; position: absolute; top: -50%; right: -50%; width: 200%; height: 200%;
+            background: var(--gradient-1); opacity: 0.05; border-radius: 50%;
+        }
+        .stat-card:hover { transform: translateY(-5px) scale(1.05); box-shadow: var(--shadow-xl); }
+        .stat-icon { font-size: 3rem; margin-bottom: 15px; background: var(--gradient-1); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+        .stat-number { font-size: 2.8rem; font-weight: 700; background: var(--gradient-1); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: transparent; margin-bottom: 10px; }
+        .stat-label { font-size: 1rem; color: #6c757d; font-weight: 500; }
+
+        .form-control, .form-select {
+            border: 2px solid #e9ecef; border-radius: 15px; padding: 12px 20px;
+            font-size: 1rem; transition: all 0.3s ease; background: #f8f9fa;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #667eea; box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25); background: white; transform: translateY(-2px);
+        }
+        .form-label { font-weight: 600; color: var(--dark-color); margin-bottom: 8px; }
+
+        .btn-primary-custom {
+            background: var(--gradient-1); border: none; color: white; padding: 12px 30px;
+            border-radius: 25px; font-weight: 600; transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .btn-primary-custom::before {
+            content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0;
+            border-radius: 50%; background: rgba(255,255,255,0.3); transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        .btn-primary-custom:hover::before { width: 300px; height: 300px; }
+        .btn-primary-custom:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3); }
+
+        .cart-badge {
+            position: absolute; top: -8px; right: -8px; background: var(--gradient-2);
+            color: white; border-radius: 50%; width: 24px; height: 24px;
+            display: flex; align-items: center; justify-content: center; font-size: 0.75rem;
+            font-weight: 700; box-shadow: var(--shadow-md); animation: bounceIn 0.5s ease;
+        }
+        @keyframes bounceIn { 0% { transform: scale(0); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
+
+        .review-card {
+            background: white; border-radius: 15px; padding: 20px; margin-bottom: 20px;
+            box-shadow: var(--shadow-sm); transition: all 0.3s ease; border-left: 4px solid transparent;
+        }
+        .review-card:hover { box-shadow: var(--shadow-md); border-left-color: #667eea; transform: translateX(5px); }
+        .rating { color: #FFD700; font-size: 1.2rem; }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark-color) 0%, #2C1810 100%); color: white;
+            padding: 60px 0 30px; margin-top: 80px; position: relative; overflow: hidden;
+        }
+        footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient-1); }
+        .footer-widget h5 { font-size: 1.3rem; margin-bottom: 25px; position: relative; padding-bottom: 15px; }
+        .footer-widget h5::after { content: ''; position: absolute; bottom: 0; left: 0; width: 50px; height: 3px; background: var(--gradient-1); }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: rgba(255,255,255,0.7); transition: all 0.3s ease; position: relative; padding-left: 20px; }
+        .footer-links a::before { content: '→'; position: absolute; left: 0; transition: transform 0.3s ease; }
+        .footer-links a:hover { color: white; padding-left: 25px; }
+        .footer-links a:hover::before { transform: translateX(5px); }
+        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
+        .social-icon {
+            width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center; color: white;
+            font-size: 1.2rem; transition: all 0.3s ease;
+        }
+        .social-icon:hover { background: var(--gradient-1); transform: translateY(-5px) rotate(360deg); }
+
+        .custom-toast { position: fixed; top: 100px; right: 20px; z-index: 9999; min-width: 350px; }
+        .toast { border-radius: 15px; box-shadow: var(--shadow-xl); backdrop-filter: blur(10px); }
+        .toast-header { border-radius: 15px 15px 0 0; border-bottom: none; }
+
+        .section-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; position: relative; display: inline-block; }
+        .section-title::after { content: ''; position: absolute; bottom: -10px; left: 0; width: 80px; height: 4px; background: var(--gradient-1); border-radius: 2px; }
+        .section-subtitle { font-size: 1.1rem; color: #6c757d; margin-bottom: 50px; }
+
+        .feature-card {
+            background: white; border-radius: 20px; padding: 40px 30px; text-align: center;
+            box-shadow: var(--shadow-md); transition: all 0.4s ease; position: relative; overflow: hidden;
+        }
+        .feature-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+            background: var(--gradient-1); transform: scaleX(0); transition: transform 0.3s ease;
+        }
+        .feature-card:hover::before { transform: scaleX(1); }
+        .feature-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-xl); }
+        .feature-icon {
+            width: 80px; height: 80px; margin: 0 auto 25px; background: var(--gradient-1);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 2rem; transition: all 0.3s ease;
+        }
+        .feature-card:hover .feature-icon { transform: scale(1.1) rotate(360deg); }
+        .feature-title { font-size: 1.4rem; margin-bottom: 15px; color: var(--dark-color); }
+        .feature-description { color: #6c757d; line-height: 1.8; }
+
+        .artisan-card {
+            background: white; border-radius: 20px; padding: 30px; text-align: center;
+            box-shadow: var(--shadow-md); transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .artisan-card::before {
+            content: ''; position: absolute; top: -50%; right: -50%; width: 200%; height: 200%;
+            background: var(--gradient-1); opacity: 0.03; border-radius: 50%;
+        }
+        .artisan-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-xl); }
+        .artisan-avatar {
+            width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 20px;
+            border: 5px solid transparent; background: linear-gradient(white, white) padding-box, var(--gradient-1) border-box;
+            padding: 5px; position: relative;
+        }
+        .artisan-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+        .artisan-name { font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; color: var(--dark-color); }
+        .artisan-tribe { color: var(--primary-color); font-weight: 600; margin-bottom: 15px; }
+        .artisan-specialty {
+            background: #f8f9fa; padding: 8px 20px; border-radius: 20px;
+            display: inline-block; margin-bottom: 20px; font-weight: 500;
+        }
+        .stats-bar {
+            background: white; border-radius: 15px; padding: 15px;
+            display: flex; justify-content: space-around; margin-top: 20px; box-shadow: var(--shadow-sm);
+        }
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 1.2rem; font-weight: 700; color: var(--primary-color); }
+        .stat-label-small { font-size: 0.85rem; color: #6c757d; }
+        
+        .search-container {
+            background: white; border-radius: 50px; padding: 5px; box-shadow: var(--shadow-md);
+            display: flex; align-items: center; overflow: hidden;
+        }
+        .search-input { border: none; outline: none; padding: 15px 25px; font-size: 1rem; flex-grow: 1; background: transparent; }
+        .search-button {
+            background: var(--gradient-1); color: white; border: none; padding: 15px 30px;
+            border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;
+        }
+        .search-button:hover { transform: scale(1.05); }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; } .hero-subtitle { font-size: 1.1rem; }
+            .section-title { font-size: 2rem; } .product-card { margin-bottom: 30px; }
+            .navbar-brand { font-size: 1.4rem; }
+        }
+        .scroll-animate { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+        .scroll-animate.visible { opacity: 1; transform: translateY(0); }
+        .fab {
+            position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
+            background: var(--gradient-1); border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; color: white; font-size: 1.5rem; box-shadow: var(--shadow-xl);
+            cursor: pointer; transition: all 0.3s ease; z-index: 999;
+        }
+        .fab:hover { transform: scale(1.1) rotate(90deg); }
+        
+        .order-timeline { position: relative; padding: 20px 0; }
+        .order-timeline::before { content: ''; position: absolute; left: 30px; top: 40px; bottom: 0; width: 2px; background: #e9ecef; }
+        .timeline-item { position: relative; padding-left: 70px; margin-bottom: 30px; }
+        .timeline-icon {
+            position: absolute; left: 20px; top: 0; width: 20px; height: 20px;
+            border-radius: 50%; background: white; border: 3px solid #e9ecef;
+            display: flex; align-items: center; justify-content: center; font-size: 0.8rem; z-index: 1;
+        }
+        .timeline-item.completed .timeline-icon { background: var(--success-color); border-color: var(--success-color); color: white; }
+        .timeline-item.active .timeline-icon { background: var(--warning-color); border-color: var(--warning-color); color: white; animation: pulse 2s infinite; }
+        .timeline-content { background: white; padding: 15px; border-radius: 10px; box-shadow: var(--shadow-sm); }
+        .timeline-title { font-weight: 600; margin-bottom: 5px; }
+        .timeline-time { font-size: 0.85rem; color: #6c757d; }
+
+        .tracking-card { background: white; border-radius: 15px; padding: 25px; box-shadow: var(--shadow-md); margin-bottom: 20px; }
+        .tracking-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #f8f9fa; }
+        .tracking-number { font-size: 1.2rem; font-weight: 600; }
+        .tracking-status { padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-confirmed { background: #cce5ff; color: #004085; }
+        .status-processing { background: #d1ecf1; color: #0c5460; }
+        .status-shipped { background: #d4edda; color: #155724; }
+        .status-delivered { background: #28a745; color: white; }
+        
+        .delivery-map {
+            background: #f8f9fa; border-radius: 10px; height: 200px;
+            display: flex; align-items: center; justify-content: center; margin: 20px 0;
+            position: relative; overflow: hidden;
+        }
+        .delivery-map::before {
+            content: ''; position: absolute; top: 50%; left: 20%; width: 60%; height: 2px;
+            background: var(--gradient-1); transform: translateY(-50%);
+        }
+        .delivery-point {
+            position: absolute; width: 40px; height: 40px; border-radius: 50%;
+            background: white; border: 3px solid var(--primary-color);
+            display: flex; align-items: center; justify-content: center; font-size: 1.2rem; z-index: 1;
+        }
+        .delivery-point.start { left: 20%; transform: translateX(-50%); }
+        .delivery-point.end { right: 20%; transform: translateX(50%); background: var(--success-color); border-color: var(--success-color); color: white; }
+        .delivery-point.current { left: 50%; transform: translateX(-50%); background: var(--warning-color); border-color: var(--warning-color); color: white; animation: pulse 2s infinite; }
+        
+        .modal-content { border-radius: 20px; border: none; box-shadow: var(--shadow-xl); }
+        .modal-header { background: var(--gradient-1); color: white; border-radius: 20px 20px 0 0; border: none; padding: 25px 30px; }
+        .modal-body { padding: 30px; }
+        .order-confirmed { animation: confirmPulse 1s ease; }
+        @keyframes confirmPulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); background: #28a745; } 100% { transform: scale(1); } }
+        .delivery-notification {
+            position: fixed; top: 100px; left: 50%; transform: translateX(-50%);
+            background: white; padding: 20px 40px; border-radius: 50px;
+            box-shadow: var(--shadow-xl); z-index: 9999; display: none; animation: slideDown 0.5s ease;
+        }
+        @keyframes slideDown { from { transform: translateX(-50%) translateY(-100px); opacity: 0; } to { transform: translateX(-50%) translateY(0); opacity: 1; } }
+        .delivery-notification.show { display: flex; align-items: center; gap: 15px; }
+        .delivery-icon {
+            width: 50px; height: 50px; background: var(--gradient-1); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: white;
+            font-size: 1.5rem; animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Enhanced Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand" href="#" onclick="showView('home')">
+                <i class="bi bi-palette-fill"></i> TribalCraft
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showView('home')"><i class="bi bi-house-fill"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showView('products')"><i class="bi bi-shop-fill"></i> Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showView('artisans')"><i class="bi bi-people-fill"></i> Artisans</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showView('about')"><i class="bi bi-info-circle-fill"></i> About</a></li>
+                    <li class="nav-item position-relative">
+                        <a class="nav-link" href="#" onclick="showView('cart')">
+                            <i class="bi bi-cart3"></i> Cart
+                            <span class="cart-badge" id="cartCount">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle"></i> <span id="currentUserDisplay">Guest</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#" onclick="showView('login')"><i class="bi bi-box-arrow-in-right"></i> Login</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showView('register')"><i class="bi bi-person-plus"></i> Register</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="showView('dashboard')"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="logout()"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Delivery Notification -->
+    <div class="delivery-notification" id="deliveryNotification">
+        <div class="delivery-icon"><i class="bi bi-truck"></i></div>
+        <div><strong>Your order is on the way!</strong><p class="mb-0 small">Track your delivery in real-time</p></div>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="container" style="margin-top: 80px;">
+        <!-- Home View -->
+        <div id="homeView" class="view">
+            <div class="hero-section">
+                <div class="container">
+                    <h1 class="hero-title">Empowering Tribal Artisans Worldwide</h1>
+                    <p class="hero-subtitle">Discover authentic handcrafted treasures from tribal communities</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-hero btn-hero-primary" onclick="showView('products')">Explore Products <i class="bi bi-arrow-right-circle"></i></button>
+                        <button class="btn btn-hero btn-hero-outline" onclick="showView('artisans')">Meet Artisans <i class="bi bi-people"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="container my-5">
+                <div class="row">
+                    <div class="col-md-4 mb-4 scroll-animate"><div class="feature-card"><div class="feature-icon"><i class="bi bi-people-fill"></i></div><h3 class="feature-title">Support Artisans</h3><p class="feature-description">Directly support tribal artisans and their communities through fair trade practices</p></div></div>
+                    <div class="col-md-4 mb-4 scroll-animate"><div class="feature-card"><div class="feature-icon"><i class="bi bi-gem"></i></div><h3 class="feature-title">Authentic Crafts</h3><p class="feature-description">100% authentic traditional handicrafts verified by cultural experts</p></div></div>
+                    <div class="col-md-4 mb-4 scroll-animate"><div class="feature-card"><div class="feature-icon"><i class="bi bi-truck"></i></div><h3 class="feature-title">Fast Delivery</h3><p class="feature-description">Track your orders in real-time with our advanced delivery system</p></div></div>
+                </div>
+                <div class="text-center my-5 scroll-animate"><h2 class="section-title">Featured Products</h2><p class="section-subtitle">Handpicked treasures from our talented artisans</p></div>
+                <div class="row" id="featuredProducts"></div>
+            </div>
+        </div>
+
+        <!-- Products View -->
+        <div id="productsView" class="view" style="display: none;">
+            <div class="text-center my-5"><h2 class="section-title">All Products</h2><p class="section-subtitle">Browse our complete collection of tribal handicrafts</p></div>
+            <div class="row mb-4">
+                <div class="col-md-8"><div class="search-container"><input type="text" class="search-input" placeholder="Search for products, artisans, or categories..." id="searchInput"><button class="search-button" onclick="filterProducts()"><i class="bi bi-search"></i> Search</button></div></div>
+                <div class="col-md-4"><select class="form-select" id="categoryFilter" onchange="filterProducts()"><option value="">All Categories</option><option value="pottery">Pottery</option><option value="textiles">Textiles</option><option value="jewelry">Jewelry</option><option value="woodwork">Woodwork</option></select></div>
+            </div>
+            <div class="row" id="allProducts"></div>
+        </div>
+
+        <!-- Artisans View -->
+        <div id="artisansView" class="view" style="display: none;">
+            <div class="text-center my-5">
+                <h2 class="section-title">Our Talented Artisans</h2>
+                <p class="section-subtitle">Meet the master craftsmen and women behind our products</p>
+                <button class="btn btn-primary-custom mb-4" onclick="showAddArtisanModal()">
+                    <i class="bi bi-person-plus-fill"></i> Add New Artisan
+                </button>
+            </div>
+            <div class="row" id="artisansList"></div>
+        </div>
+
+        <!-- About View -->
+        <div id="aboutView" class="view" style="display: none;">
+            <div class="container my-5">
+                <div class="dashboard-card">
+                    <h2 class="section-title">About TribalCraft</h2>
+                    <p class="lead">Bridging traditional craftsmanship with the modern marketplace</p>
+                    <p>TribalCraft is dedicated to preserving and promoting the rich heritage of tribal handicrafts. Our platform connects skilled tribal artisans with a global audience, ensuring fair compensation and cultural preservation.</p>
+                    
+                    <h3 class="mt-5 mb-3">Our Mission</h3>
+                    <div class="row">
+                        <div class="col-md-6"><ul class="list-unstyled"><li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i> Empower tribal communities through sustainable economic opportunities</li><li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i> Preserve traditional crafting techniques passed down through generations</li></ul></div>
+                        <div class="col-md-6"><ul class="list-unstyled"><li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i> Provide authentic, high-quality handicrafts to customers worldwide</li><li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i> Ensure fair trade practices and direct artisan compensation</li></ul></div>
+                    </div>
+
+                    <h3 class="mt-5 mb-4">Our Core Values</h3>
+                    <div class="row mt-3">
+                        <div class="col-md-3 text-center mb-4"><div class="feature-card"><i class="bi bi-heart-fill text-danger" style="font-size: 3rem;"></i><h5 class="mt-3">Authenticity</h5><p class="small">Every product tells a genuine story</p></div></div>
+                        <div class="col-md-3 text-center mb-4"><div class="feature-card"><i class="bi bi-shield-check text-success" style="font-size: 3rem;"></i><h5 class="mt-3">Quality</h5><p class="small">Excellence in every craft</p></div></div>
+                        <div class="col-md-3 text-center mb-4"><div class="feature-card"><i class="bi bi-balance-scale text-primary" style="font-size: 3rem;"></i><h5 class="mt-3">Fair Trade</h5><p class="small">Ethical business practices</p></div></div>
+                        <div class="col-md-3 text-center mb-4"><div class="feature-card"><i class="bi bi-truck text-info" style="font-size: 3rem;"></i><h5 class="mt-3">Fast Delivery</h5><p class="small">Real-time order tracking</p></div></div>
+                    </div>
+
+                    <!-- Team section -->
+                    <div class="container my-5">
+                        <div class="text-center mb-4">
+                            <h2 class="section-title">Our Team</h2>
+                            <p class="section-subtitle">Meet the people behind TribalCraft</p>
+                        </div>
+                        <div class="row" id="teamList">
+                            <div class="col-md-4 mb-4">
+                                <div class="artisan-card">
+                                    <div class="artisan-avatar">
+                                        <img src="https://picsum.photos/seed/team1/200/200" alt="Team Member">
+                                    </div>
+                                    <h4 class="artisan-name">Sarah Johnson</h4>
+                                    <p class="text-muted">CEO & Founder</p>
+                                    <p>Passionate about preserving tribal cultures and empowering artisans worldwide.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="artisan-card">
+                                    <div class="artisan-avatar">
+                                        <img src="https://picsum.photos/seed/team2/200/200" alt="Team Member">
+                                    </div>
+                                    <h4 class="artisan-name">Michael Chen</h4>
+                                    <p class="text-muted">Cultural Consultant</p>
+                                    <p>Expert in tribal art history and cultural preservation techniques.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="artisan-card">
+                                    <div class="artisan-avatar">
+                                        <img src="https://picsum.photos/seed/team3/200/200" alt="Team Member">
+                                    </div>
+                                    <h4 class="artisan-name">Emily Rodriguez</h4>
+                                    <p class="text-muted">Operations Manager</p>
+                                    <p>Ensuring smooth operations and excellent customer service.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cart View -->
+        <div id="cartView" class="view" style="display: none;">
+            <div class="text-center my-5"><h2 class="section-title">Shopping Cart</h2><p class="section-subtitle">Review your selected items</p></div>
+            <div id="cartItems"></div>
+            <div class="row mt-4">
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                    <div class="dashboard-card">
+                        <h4>Order Summary</h4>
+                        <hr>
+                        <div class="d-flex justify-content-between mb-2"><span>Subtotal:</span><span id="cartSubtotal">$0.00</span></div>
+                        <div class="d-flex justify-content-between mb-2"><span>Shipping:</span><span id="cartShipping">$10.00</span></div>
+                        <div class="d-flex justify-content-between mb-3"><strong>Total:</strong><strong id="cartTotal">$0.00</strong></div>
+                        <button class="btn btn-primary-custom w-100" onclick="checkout()"><i class="bi bi-lock-fill"></i> Proceed to Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Confirmation View -->
+        <div id="orderConfirmationView" class="view" style="display: none;">
+            <div class="container my-5">
+                <div class="text-center mb-5">
+                    <div class="mb-4"><i class="bi bi-check-circle-fill text-success" style="font-size: 5rem;"></i></div>
+                    <h2 class="section-title">Order Confirmed!</h2>
+                    <p class="section-subtitle">Thank you for your purchase. Your order has been received.</p>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="tracking-card order-confirmed">
+                            <div class="tracking-header">
+                                <div>
+                                    <div class="tracking-number">Order #<span id="confirmedOrderId"></span></div>
+                                    <small class="text-muted">Placed on <span id="confirmedOrderDate"></span></small>
+                                </div>
+                                <span class="tracking-status status-confirmed">Confirmed</span>
+                            </div>
+                            <div class="order-timeline" id="orderTimeline"></div>
+                            <div class="delivery-map">
+                                <div class="delivery-point start"><i class="bi bi-box-seam"></i></div>
+                                <div class="delivery-point current"><i class="bi bi-geo-alt"></i></div>
+                                <div class="delivery-point end"><i class="bi bi-house-door-fill"></i></div>
+                            </div>
+                            <div class="text-center mt-4">
+                                <button class="btn btn-primary-custom me-2" onclick="showView('dashboard')"><i class="bi bi-speedometer2"></i> Track Order</button>
+                                <button class="btn btn-outline-primary" onclick="showView('products')"><i class="bi bi-shop"></i> Continue Shopping</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login View -->
+        <div id="loginView" class="view" style="display: none;">
+            <div class="container my-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <div class="dashboard-card">
+                            <div class="text-center mb-4">
+                                <i class="bi bi-person-circle" style="font-size: 4rem; color: var(--primary-color);"></i>
+                                <h3 class="mt-3">Welcome Back</h3>
+                                <p class="text-muted">Login to access your account</p>
+                            </div>
+                            <form onsubmit="login(event)">
+                                <div class="mb-3"><label class="form-label">Email Address</label><div class="input-group"><span class="input-group-text"><i class="bi bi-envelope"></i></span><input type="email" class="form-control" id="loginEmail" required></div></div>
+                                <div class="mb-3"><label class="form-label">Password</label><div class="input-group"><span class="input-group-text"><i class="bi bi-lock"></i></span><input type="password" class="form-control" id="loginPassword" required></div></div>
+                                <div class="mb-3"><label class="form-label">Login as</label><select class="form-select" id="loginRole"><option value="customer">Customer</option><option value="artisan">Artisan</option><option value="admin">Admin</option><option value="consultant">Cultural Consultant</option></select></div>
+                                <div class="mb-3 form-check"><input type="checkbox" class="form-check-input" id="rememberMe"><label class="form-check-label" for="rememberMe">Remember me</label></div>
+                                <button type="submit" class="btn btn-primary-custom w-100"><i class="bi bi-box-arrow-in-right"></i> Login</button>
+                            </form>
+                            <p class="text-center mt-4">Don't have an account? <a href="#" onclick="showView('register')" class="text-primary">Register here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Register View -->
+        <div id="registerView" class="view" style="display: none;">
+            <div class="container my-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <div class="dashboard-card">
+                            <div class="text-center mb-4">
+                                <i class="bi bi-person-plus-fill" style="font-size: 4rem; color: var(--primary-color);"></i>
+                                <h3 class="mt-3">Create Account</h3>
+                                <p class="text-muted">Join our community today</p>
+                            </div>
+                            <form onsubmit="register(event)">
+                                <div class="mb-3"><label class="form-label">Full Name</label><div class="input-group"><span class="input-group-text"><i class="bi bi-person"></i></span><input type="text" class="form-control" id="registerName" required></div></div>
+                                <div class="mb-3"><label class="form-label">Email Address</label><div class="input-group"><span class="input-group-text"><i class="bi bi-envelope"></i></span><input type="email" class="form-control" id="registerEmail" required></div></div>
+                                <div class="mb-3"><label class="form-label">Password</label><div class="input-group"><span class="input-group-text"><i class="bi bi-lock"></i></span><input type="password" class="form-control" id="registerPassword" required></div></div>
+                                <div class="mb-3"><label class="form-label">Register as</label><select class="form-select" id="registerRole" onchange="toggleTribeField()"><option value="customer">Customer</option><option value="artisan">Artisan</option></select></div>
+                                <div class="mb-3" id="tribeField" style="display: none;"><label class="form-label">Tribe/Community</label><div class="input-group"><span class="input-group-text"><i class="bi bi-geo-alt"></i></span><input type="text" class="form-control" id="registerTribe"></div></div>
+                                <div class="mb-3 form-check"><input type="checkbox" class="form-check-input" id="agreeTerms" required><label class="form-check-label" for="agreeTerms">I agree to the Terms and Conditions</label></div>
+                                <button type="submit" class="btn btn-primary-custom w-100"><i class="bi bi-person-plus"></i> Create Account</button>
+                            </form>
+                            <p class="text-center mt-4">Already have an account? <a href="#" onclick="showView('login')" class="text-primary">Login here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard View -->
+        <div id="dashboardView" class="view" style="display: none;">
+            <div class="text-center my-5"><h2 class="section-title">Dashboard</h2><p class="section-subtitle">Manage your account and activities</p></div>
+            
+            <!-- Customer Dashboard -->
+            <div id="customerDashboard" style="display: none;">
+                <div class="row mb-4">
+                    <div class="col-md-3 mb-3"><div class="stat-card"><i class="bi bi-bag-check stat-icon"></i><div class="stat-number" id="customerOrders">0</div><div class="stat-label">Total Orders</div></div></div>
+                    <div class="col-md-3 mb-3"><div class="stat-card"><i class="bi bi-star-fill stat-icon"></i><div class="stat-number" id="customerReviews">0</div><div class="stat-label">Reviews Given</div></div></div>
+                    <div class="col-md-3 mb-3"><div class="stat-card"><i class="bi bi-truck stat-icon"></i><div class="stat-number" id="customerDeliveries">0</div><div class="stat-label">Deliveries</div></div></div>
+                    <div class="col-md-3 mb-3"><div class="stat-card"><i class="bi bi-geo-alt-fill stat-icon"></i><div class="stat-number" id="customerAddresses">1</div><div class="stat-label">Saved Addresses</div></div></div>
+                </div>
+                <div class="dashboard-card"><h4 class="mb-4">Recent Orders & Tracking</h4><div id="customerOrderHistory"></div></div>
+            </div>
+
+            <!-- Artisan Dashboard -->
+            <div id="artisanDashboard" style="display: none;">
+                <div class="row mb-4">
+                    <div class="col-md-3 mb-3"><div class="stat-card"><i class="bi bi-box-seam stat-icon"></i><div class="stat-number" id="artisanProducts">0</div><div class="stat-label">Products Listed</div></div></div>
+                    <div class="col-md-3 mb-3"><div class="stat-card"><i class="bi bi-cart-check-fill stat-icon"></i><div class="stat-number" id="artisanSales">0</div><div class="stat-label">Total Sales</div></div></div>
+                    <div class="col-md-3 mb-3"><div class="stat-card"><i class="bi bi-currency-dollar stat-icon"></i><div class="stat-number" id="artisanRevenue">$0</div><div class="stat-label">Revenue</div></div></div>
+                    <div class="col-md-3 mb-3"><div class="stat-card"><i class="bi bi-truck stat-icon"></i><div class="stat-number" id="artisanShipments">0</div><div class="stat-label">Items Shipped</div></div></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="dashboard-card">
+                            <div class="d-flex justify-content-between align-items-center mb-4"><h4>My Products</h4><button class="btn btn-primary-custom" onclick="showAddProductModal()"><i class="bi bi-plus-circle"></i> Add Product</button></div>
+                            <div id="artisanProductsList"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="dashboard-card"><h4 class="mb-4">Recent Orders</h4><div id="artisanOrderList"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Dashboard -->
+            <div id="adminDashboard" style="display: none;">
+                <div class="row mb-4">
+                    <div class="col-md-3 mb-3"><div class="stat-card"><i class="bi bi-people-fill stat-icon"></i><div class="stat-number" id="adminUsers">0</div><div class="stat-label">Total Users</div></div></div>
+                    <div class="col-md-3 mb-3"><div class="stat-card"><i class="bi bi-box-seam-fill stat-icon"></i><div class="stat-number" id="adminProducts">0</div><div class="stat-label">Total Products</div></div></div>
+                    <div class="col-md-3 mb-3"><div class="stat-card"><i class="bi bi-receipt stat-icon"></i><div class="stat-number" id="adminOrders">0</div><div class="stat-label">Total Orders</div></div></div>
+                    <div class="col-md-3 mb-3"><div class="stat-card"><i class="bi bi-truck stat-icon"></i><div class="stat-number" id="adminDeliveries">0</div><div class="stat-label">Active Deliveries</div></div></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="dashboard-card"><h4 class="mb-4">Order Management</h4><div class="table-responsive"><table class="table"><thead><tr><th>Order ID</th><th>Customer</th><th>Status</th><th>Actions</th></tr></thead><tbody id="adminOrderList"></tbody></table></div></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="dashboard-card"><h4 class="mb-4">Delivery Tracking</h4><div id="adminDeliveryTracking"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cultural Consultant Dashboard -->
+            <div id="consultantDashboard" style="display: none;">
+                <div class="row mb-4">
+                    <div class="col-md-4 mb-3"><div class="stat-card"><i class="bi bi-check-circle-fill stat-icon"></i><div class="stat-number" id="consultantVerified">0</div><div class="stat-label">Verified Products</div></div></div>
+                    <div class="col-md-4 mb-3"><div class="stat-card"><i class="bi bi-clock-fill stat-icon"></i><div class="stat-number" id="consultantPending">0</div><div class="stat-label">Pending Review</div></div></div>
+                    <div class="col-md-4 mb-3"><div class="stat-card"><i class="bi bi-book-fill stat-icon"></i><div class="stat-number" id="consultantStories">0</div><div class="stat-label">Cultural Stories</div></div></div>
+                </div>
+                <div class="dashboard-card"><h4 class="mb-4">Products Pending Cultural Verification</h4><div id="consultantPendingProducts"></div></div>
+                <div class="dashboard-card mt-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4"><h4>Cultural Heritage Stories</h4><button class="btn btn-primary-custom" onclick="showAddStoryModal()"><i class="bi bi-plus-circle"></i> Add Story</button></div>
+                    <div id="consultantStoriesList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header"><h5 class="modal-title" id="productModalTitle">Product Details</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body" id="productModalBody"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div class="modal fade" id="addProductModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header"><h5 class="modal-title">Add New Product</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body">
+                    <form onsubmit="addProduct(event)">
+                        <div class="row">
+                            <div class="col-md-6 mb-3"><label class="form-label">Product Name</label><input type="text" class="form-control" id="newProductName" required></div>
+                            <div class="col-md-6 mb-3"><label class="form-label">Category</label><select class="form-select" id="newProductCategory" required><option value="">Select Category</option><option value="pottery">Pottery</option><option value="textiles">Textiles</option><option value="jewelry">Jewelry</option><option value="woodwork">Woodwork</option></select></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3"><label class="form-label">Price ($)</label><input type="number" class="form-control" id="newProductPrice" step="0.01" required></div>
+                            <div class="col-md-6 mb-3"><label class="form-label">Stock Quantity</label><input type="number" class="form-control" id="newProductStock" required></div>
+                        </div>
+                        <div class="mb-3"><label class="form-label">Description</label><textarea class="form-control" id="newProductDescription" rows="3" required></textarea></div>
+                        <div class="mb-3"><label class="form-label">Cultural Significance</label><textarea class="form-control" id="newProductCultural" rows="2" placeholder="Describe the cultural importance and traditional significance..."></textarea></div>
+                        <button type="submit" class="btn btn-primary-custom"><i class="bi bi-plus-circle"></i> Add Product</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Artisan Modal -->
+    <div class="modal fade" id="addArtisanModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header"><h5 class="modal-title">Add New Artisan</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body">
+                    <form onsubmit="addArtisan(event)">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Artisan Name</label>
+                                <input type="text" class="form-control" id="artisanName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Tribe/Community</label>
+                                <input type="text" class="form-control" id="artisanTribe" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Specialty</label>
+                                <select class="form-select" id="artisanSpecialty" required>
+                                    <option value="">Select Specialty</option>
+                                    <option value="Textile Weaving">Textile Weaving</option>
+                                    <option value="Pottery">Pottery</option>
+                                    <option value="Jewelry Making">Jewelry Making</option>
+                                    <option value="Woodwork">Woodwork</option>
+                                    <option value="Basket Weaving">Basket Weaving</option>
+                                    <option value="Leather Craft">Leather Craft</option>
+                                    <option value="Metal Work">Metal Work</option>
+                                    <option value="Painting">Painting</option>
+                                    <option value="Music Instruments">Music Instruments</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Experience (years)</label>
+                                <input type="number" class="form-control" id="artisanExperience" min="0" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Bio</label>
+                            <textarea class="form-control" id="artisanBio" rows="3" placeholder="Tell us about the artisan's background, skills, and story..." required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Location</label>
+                            <input type="text" class="form-control" id="artisanLocation" placeholder="City, Country" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Contact Email</label>
+                            <input type="email" class="form-control" id="artisanEmail" placeholder="artisan@example.com" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary-custom">
+                            <i class="bi bi-person-plus"></i> Add Artisan
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Story Modal -->
+    <div class="modal fade" id="addStoryModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header"><h5 class="modal-title">Add Cultural Story</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body">
+                    <form onsubmit="addStory(event)">
+                        <div class="mb-3">
+                            <label class="form-label">Story Title</label>
+                            <input type="text" class="form-control" id="storyTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tribe/Community</label>
+                            <input type="text" class="form-control" id="storyTribe" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Story Content</label>
+                            <textarea class="form-control" id="storyContent" rows="5" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Related Product (Optional)</label>
+                            <select class="form-select" id="storyProduct">
+                                <option value="">None</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary-custom">
+                            <i class="bi bi-plus-circle"></i> Add Story
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="footer-widget">
+                        <h5><i class="bi bi-palette-fill"></i> TribalCraft</h5>
+                        <p>Empowering tribal artisans worldwide by connecting their traditional crafts with a global audience.</p>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <div class="footer-widget">
+                        <h5>Quick Links</h5>
+                        <ul class="footer-links">
+                            <li><a href="#" onclick="showView('home')">Home</a></li>
+                            <li><a href="#" onclick="showView('products')">Products</a></li>
+                            <li><a href="#" onclick="showView('artisans')">Artisans</a></li>
+                            <li><a href="#" onclick="showView('about')">About Us</a></li>
+                            <li><a href="#" onclick="showView('dashboard')">Dashboard</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="footer-widget">
+                        <h5>Customer Service</h5>
+                        <ul class="footer-links">
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Shipping Policy</a></li>
+                            <li><a href="#">Return Policy</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="footer-widget">
+                        <h5>Newsletter</h5>
+                        <p>Subscribe to get updates on new products and artisan stories.</p>
+                        <div class="input-group mt-3">
+                            <input type="email" class="form-control" placeholder="Your email">
+                            <button class="btn btn-primary-custom" type="button">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2023 TribalCraft. All rights reserved. Made with <i class="bi bi-heart-fill text-danger"></i> for tribal artisans.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div class="fab" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <i class="bi bi-arrow-up"></i>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="custom-toast">
+        <div class="toast" id="notificationToast" role="alert">
+            <div class="toast-header">
+                <i class="bi bi-bell-fill me-2"></i>
+                <strong class="me-auto">Notification</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body" id="toastMessage">
+                Notification message here
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Global Variables
+        let currentUser = null;
+        let cart = [];
+        let products = [];
+        let artisans = [];
+        let orders = [];
+        let stories = [];
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load data from localStorage or initialize with sample data
+            loadData();
+            
+            // Show home view by default
+            showView('home');
+            
+            // Update UI
+            updateCartCount();
+            updateCurrentUserDisplay();
+            
+            // Add scroll effect to navbar
+            window.addEventListener('scroll', function() {
+                const navbar = document.getElementById('mainNavbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // Initialize animations
+            initScrollAnimations();
+        });
+
+        // Load Data
+        function loadData() {
+            // Load from localStorage if available
+            const savedProducts = localStorage.getItem('tribalCraftProducts');
+            const savedArtisans = localStorage.getItem('tribalCraftArtisans');
+            const savedOrders = localStorage.getItem('tribalCraftOrders');
+            const savedStories = localStorage.getItem('tribalCraftStories');
+            const savedUser = localStorage.getItem('tribalCraftCurrentUser');
+            
+            if (savedProducts) products = JSON.parse(savedProducts);
+            else {
+                // Sample products
+                products = [
+                    { id: 1, name: "Handwoven Tribal Basket", category: "pottery", price: 45.00, artisan: "Maya Weaver", tribe: "Navajo", image: "https://picsum.photos/seed/basket1/400/300", description: "Traditional handwoven basket using natural dyes and techniques passed down through generations.", cultural: "This basket represents the connection between earth and sky in Navajo cosmology.", stock: 5, verified: true },
+                    { id: 2, name: "Pottery Vase with Tribal Motifs", category: "pottery", price: 120.00, artisan: "Carlos Potter", tribe: "Zuni", image: "https://picsum.photos/seed/pottery1/400/300", description: "Handcrafted pottery featuring traditional Zuni symbols and patterns.", cultural: "Each motif tells a story of Zuni mythology and spiritual beliefs.", stock: 3, verified: true },
+                    { id: 3, name: "Silver Tribal Necklace", category: "jewelry", price: 85.00, artisan: "Luna Silver", tribe: "Hopi", image: "https://picsum.photos/seed/jewelry1/400/300", description: "Sterling silver necklace with authentic Hopi tribal symbols.", cultural: "Represents the Hopi connection to the earth and sky spirits.", stock: 8, verified: true },
+                    { id: 4, name: "Carved Wooden Mask", category: "woodwork", price: 200.00, artisan: "Kai Woodcarver", tribe: "Maori", image: "https://picsum.photos/seed/wood1/400/300", description: "Traditional mask carved from native timber using ancestral techniques.", cultural: "Used in ceremonial dances to connect with ancestral spirits.", stock: 2, verified: true },
+                    { id: 5, name: "Embroidered Textile Wall Hanging", category: "textiles", price: 150.00, artisan: "Nina Weaver", tribe: "Quechua", image: "https://picsum.photos/seed/textile1/400/300", description: "Vibrant textile featuring traditional Andean patterns and symbols.", cultural: "Each pattern represents elements of Quechua cosmology and daily life.", stock: 4, verified: true },
+                    { id: 6, name: "Beaded Bracelet Set", category: "jewelry", price: 35.00, artisan: "Aria Beader", tribe: "Maasai", image: "https://picsum.photos/seed/beads1/400/300", description: "Colorful beaded bracelets using traditional Maasai patterns.", cultural: "Colors represent important aspects of Maasai life and beliefs.", stock: 10, verified: true }
+                ];
+                saveData();
+            }
+            
+            if (savedArtisans) artisans = JSON.parse(savedArtisans);
+            else {
+                // Sample artisans
+                artisans = [
+                    { id: 1, name: "Maya Weaver", tribe: "Navajo", specialty: "Basket Weaving", experience: 25, bio: "Learned the art from her grandmother and has been weaving for over 25 years.", location: "Arizona, USA", email: "maya@tribalcraft.com", products: 12, sales: 156, rating: 4.9 },
+                    { id: 2, name: "Carlos Potter", tribe: "Zuni", specialty: "Pottery", experience: 30, bio: "Master potter preserving ancient Zuni techniques while creating contemporary designs.", location: "New Mexico, USA", email: "carlos@tribalcraft.com", products: 8, sales: 98, rating: 4.8 },
+                    { id: 3, name: "Luna Silver", tribe: "Hopi", specialty: "Jewelry Making", experience: 15, bio: "Creates beautiful silver jewelry inspired by Hopi traditions and natural surroundings.", location: "Arizona, USA", email: "luna@tribalcraft.com", products: 15, sales: 210, rating: 4.7 },
+                    { id: 4, name: "Kai Woodcarver", tribe: "Maori", specialty: "Woodwork", experience: 20, bio: "Carves traditional Maori masks and sculptures using native New Zealand timber.", location: "Rotorua, New Zealand", email: "kai@tribalcraft.com", products: 6, sales: 45, rating: 5.0 },
+                    { id: 5, name: "Nina Weaver", tribe: "Quechua", specialty: "Textile Weaving", experience: 35, bio: "Master weaver creating intricate textiles with traditional Andean patterns.", location: "Cusco, Peru", email: "nina@tribalcraft.com", products: 20, sales: 320, rating: 4.9 },
+                    { id: 6, name: "Aria Beader", tribe: "Maasai", specialty: "Beadwork", experience: 18, bio: "Creates vibrant beaded jewelry and accessories using traditional Maasai techniques.", location: "Nairobi, Kenya", email: "aria@tribalcraft.com", products: 25, sales: 450, rating: 4.8 }
+                ];
+                saveData();
+            }
+            
+            if (savedOrders) orders = JSON.parse(savedOrders);
+            else orders = [];
+            
+            if (savedStories) stories = JSON.parse(savedStories);
+            else {
+                // Sample stories
+                stories = [
+                    { id: 1, title: "The Legend of the Dreamcatcher", tribe: "Ojibwe", content: "The dreamcatcher originated with the Ojibwe people and was later adopted by other tribes. It's believed to filter dreams, letting good dreams pass through while catching bad ones in the web.", product: 1 },
+                    { id: 2, title: "Zuni Pottery Traditions", tribe: "Zuni", content: "Zuni pottery is known for its intricate geometric patterns and symbolic representations of animals and nature. Each piece tells a story and holds spiritual significance.", product: 2 }
+                ];
+                saveData();
+            }
+            
+            if (savedUser) currentUser = JSON.parse(savedUser);
+        }
+
+        // Save Data
+        function saveData() {
+            localStorage.setItem('tribalCraftProducts', JSON.stringify(products));
+            localStorage.setItem('tribalCraftArtisans', JSON.stringify(artisans));
+            localStorage.setItem('tribalCraftOrders', JSON.stringify(orders));
+            localStorage.setItem('tribalCraftStories', JSON.stringify(stories));
+            if (currentUser) localStorage.setItem('tribalCraftCurrentUser', JSON.stringify(currentUser));
+        }
+
+        // View Management
+        function showView(viewName) {
+            // Hide all views
+            document.querySelectorAll('.view').forEach(view => {
+                view.style.display = 'none';
+            });
+            
+            // Show selected view
+            document.getElementById(viewName + 'View').style.display = 'block';
+            
+            // Update view-specific content
+            switch(viewName) {
+                case 'home':
+                    displayFeaturedProducts();
+                    break;
+                case 'products':
+                    displayAllProducts();
+                    break;
+                case 'artisans':
+                    displayArtisans();
+                    break;
+                case 'cart':
+                    displayCart();
+                    break;
+                case 'dashboard':
+                    displayDashboard();
+                    break;
+                case 'orderConfirmation':
+                    displayOrderConfirmation();
+                    break;
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Display Featured Products
+        function displayFeaturedProducts() {
+            const container = document.getElementById('featuredProducts');
+            container.innerHTML = '';
+            
+            products.slice(0, 3).forEach(product => {
+                const productCard = createProductCard(product);
+                container.appendChild(productCard);
+            });
+        }
+
+        // Display All Products
+        function displayAllProducts() {
+            const container = document.getElementById('allProducts');
+            container.innerHTML = '';
+            
+            products.forEach(product => {
+                const productCard = createProductCard(product);
+                container.appendChild(productCard);
+            });
+        }
+
+        // Create Product Card
+        function createProductCard(product) {
+            const col = document.createElement('div');
+            col.className = 'col-md-4 mb-4';
+            
+            col.innerHTML = `
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
+                        <div class="product-overlay">
+                            <button class="btn btn-primary-custom" onclick="showProductDetails(${product.id})">
+                                <i class="bi bi-eye-fill"></i> Quick View
+                            </button>
+                        </div>
+                        ${product.stock < 5 ? '<div class="product-badge">Low Stock</div>' : ''}
+                    </div>
+                    <div class="product-body">
+                        <h5 class="product-title">${product.name}</h5>
+                        <p class="product-artisan">by ${product.artisan} from ${product.tribe}</p>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-footer">
+                            <div class="product-price">$${product.price.toFixed(2)}</div>
+                            <button class="btn btn-add-cart" onclick="addToCart(${product.id})">
+                                <i class="bi bi-cart-plus-fill"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return col;
+        }
+
+        // Display Artisans
+        function displayArtisans() {
+            const container = document.getElementById('artisansList');
+            container.innerHTML = '';
+            
+            artisans.forEach(artisan => {
+                const col = document.createElement('div');
+                col.className = 'col-md-4 mb-4';
+                
+                col.innerHTML = `
+                    <div class="artisan-card">
+                        <div class="artisan-avatar">
+                            <img src="https://picsum.photos/seed/artisan${artisan.id}/200/200" alt="${artisan.name}">
+                        </div>
+                        <h4 class="artisan-name">${artisan.name}</h4>
+                        <p class="artisan-tribe">${artisan.tribe} Tribe</p>
+                        <div class="artisan-specialty">${artisan.specialty}</div>
+                        <p class="text-muted">${artisan.bio.substring(0, 80)}...</p>
+                        <div class="stats-bar">
+                            <div class="stat-item">
+                                <div class="stat-value">${artisan.products}</div>
+                                <div class="stat-label-small">Products</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">${artisan.sales}</div>
+                                <div class="stat-label-small">Sales</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">${artisan.rating}</div>
+                                <div class="stat-label-small">Rating</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary-custom w-100 mt-3" onclick="viewArtisanProfile(${artisan.id})">
+                            <i class="bi bi-person-lines-fill"></i> View Profile
+                        </button>
+                    </div>
+                `;
+                
+                container.appendChild(col);
+            });
+        }
+
+        // Display Cart
+        function displayCart() {
+            const container = document.getElementById('cartItems');
+            container.innerHTML = '';
+            
+            if (cart.length === 0) {
+                container.innerHTML = '<div class="text-center py-5"><i class="bi bi-cart-x" style="font-size: 4rem;"></i><h3 class="mt-3">Your cart is empty</h3><p class="text-muted">Add some products to get started!</p></div>';
+                updateCartSummary();
+                return;
+            }
+            
+            cart.forEach(item => {
+                const product = products.find(p => p.id === item.id);
+                const row = document.createElement('div');
+                row.className = 'row mb-3 align-items-center';
+                
+                row.innerHTML = `
+                    <div class="col-md-2">
+                        <img src="${product.image}" alt="${product.name}" class="img-fluid rounded">
+                    </div>
+                    <div class="col-md-4">
+                        <h5>${product.name}</h5>
+                        <p class="text-muted">by ${product.artisan}</p>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="input-group">
+                            <button class="btn btn-outline-secondary" onclick="updateCartQuantity(${item.id}, -1)">-</button>
+                            <input type="number" class="form-control text-center" value="${item.quantity}" min="1" readonly>
+                            <button class="btn btn-outline-secondary" onclick="updateCartQuantity(${item.id}, 1)">+</button>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <h5>$${(product.price * item.quantity).toFixed(2)}</h5>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-danger" onclick="removeFromCart(${item.id})">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+                    </div>
+                `;
+                
+                container.appendChild(row);
+            });
+            
+            updateCartSummary();
+        }
+
+        // Update Cart Summary
+        function updateCartSummary() {
+            const subtotal = cart.reduce((total, item) => {
+                const product = products.find(p => p.id === item.id);
+                return total + (product.price * item.quantity);
+            }, 0);
+            
+            const shipping = cart.length > 0 ? 10 : 0;
+            const total = subtotal + shipping;
+            
+            document.getElementById('cartSubtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('cartShipping').textContent = `$${shipping.toFixed(2)}`;
+            document.getElementById('cartTotal').textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Add to Cart
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ id: productId, quantity: 1 });
+            }
+            
+            updateCartCount();
+            showToast(`${product.name} added to cart!`);
+            
+            // Show cart notification animation
+            const cartBadge = document.getElementById('cartCount');
+            cartBadge.classList.add('bounceIn');
+            setTimeout(() => cartBadge.classList.remove('bounceIn'), 500);
+        }
+
+        // Update Cart Quantity
+        function updateCartQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    displayCart();
+                }
+            }
+        }
+
+        // Remove from Cart
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartCount();
+            displayCart();
+            showToast('Item removed from cart');
+        }
+
+        // Update Cart Count
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+
+        // Checkout
+        function checkout() {
+            if (!currentUser) {
+                showToast('Please login to checkout');
+                showView('login');
+                return;
+            }
+            
+            if (cart.length === 0) {
+                showToast('Your cart is empty');
+                return;
+            }
+            
+            // Create order
+            const order = {
+                id: Date.now(),
+                customerId: currentUser.id,
+                items: [...cart],
+                date: new Date().toISOString(),
+                status: 'confirmed',
+                total: document.getElementById('cartTotal').textContent
+            };
+            
+            orders.push(order);
+            saveData();
+            
+            // Clear cart
+            cart = [];
+            updateCartCount();
+            
+            // Show order confirmation
+            showView('orderConfirmation');
+            showToast('Order placed successfully!');
+            
+            // Simulate delivery notification
+            setTimeout(() => {
+                showDeliveryNotification();
+            }, 5000);
+        }
+
+        // Display Order Confirmation
+        function displayOrderConfirmation() {
+            if (orders.length === 0) return;
+            
+            const lastOrder = orders[orders.length - 1];
+            document.getElementById('confirmedOrderId').textContent = lastOrder.id;
+            document.getElementById('confirmedOrderDate').textContent = new Date(lastOrder.date).toLocaleDateString();
+            
+            // Create timeline
+            const timeline = document.getElementById('orderTimeline');
+            timeline.innerHTML = `
+                <div class="timeline-item completed">
+                    <div class="timeline-icon"><i class="bi bi-check"></i></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Order Confirmed</div>
+                        <div class="timeline-time">${new Date(lastOrder.date).toLocaleTimeString()}</div>
+                    </div>
+                </div>
+                <div class="timeline-item active">
+                    <div class="timeline-icon"><i class="bi bi-clock"></i></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Processing</div>
+                        <div class="timeline-time">Estimated: Today</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="bi bi-truck"></i></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Shipped</div>
+                        <div class="timeline-time">Estimated: Tomorrow</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="bi bi-house-door"></i></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Delivered</div>
+                        <div class="timeline-time">Estimated: 3-5 days</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Show Delivery Notification
+        function showDeliveryNotification() {
+            const notification = document.getElementById('deliveryNotification');
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+
+        // User Authentication
+        function login(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const role = document.getElementById('loginRole').value;
+            
+            // Simulate authentication
+            currentUser = {
+                id: Date.now(),
+                email: email,
+                role: role,
+                name: email.split('@')[0]
+            };
+            
+            saveData();
+            updateCurrentUserDisplay();
+            showToast(`Welcome back, ${currentUser.name}!`);
+            showView('dashboard');
+        }
+
+        function register(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const role = document.getElementById('registerRole').value;
+            const tribe = document.getElementById('registerTribe').value;
+            
+            // Simulate registration
+            currentUser = {
+                id: Date.now(),
+                name: name,
+                email: email,
+                role: role,
+                tribe: tribe || null
+            };
+            
+            // If artisan, add to artisans list
+            if (role === 'artisan') {
+                artisans.push({
+                    id: currentUser.id,
+                    name: name,
+                    tribe: tribe,
+                    specialty: "Not specified",
+                    experience: 0,
+                    bio: "New artisan",
+                    location: "Not specified",
+                    email: email,
+                    products: 0,
+                    sales: 0,
+                    rating: 0
+                });
+                saveData();
+            }
+            
+            saveData();
+            updateCurrentUserDisplay();
+            showToast(`Welcome to TribalCraft, ${name}!`);
+            showView('dashboard');
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('tribalCraftCurrentUser');
+            updateCurrentUserDisplay();
+            showToast('You have been logged out');
+            showView('home');
+        }
+
+        function updateCurrentUserDisplay() {
+            const display = document.getElementById('currentUserDisplay');
+            display.textContent = currentUser ? currentUser.name : 'Guest';
+        }
+
+        function toggleTribeField() {
+            const role = document.getElementById('registerRole').value;
+            const tribeField = document.getElementById('tribeField');
+            
+            if (role === 'artisan') {
+                tribeField.style.display = 'block';
+            } else {
+                tribeField.style.display = 'none';
+            }
+        }
+
+        // Dashboard
+        function displayDashboard() {
+            if (!currentUser) {
+                showToast('Please login to view dashboard');
+                showView('login');
+                return;
+            }
+            
+            // Hide all dashboard sections
+            document.getElementById('customerDashboard').style.display = 'none';
+            document.getElementById('artisanDashboard').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('consultantDashboard').style.display = 'none';
+            
+            // Show appropriate dashboard
+            switch(currentUser.role) {
+                case 'customer':
+                    displayCustomerDashboard();
+                    break;
+                case 'artisan':
+                    displayArtisanDashboard();
+                    break;
+                case 'admin':
+                    displayAdminDashboard();
+                    break;
+                case 'consultant':
+                    displayConsultantDashboard();
+                    break;
+            }
+        }
+
+        function displayCustomerDashboard() {
+            document.getElementById('customerDashboard').style.display = 'block';
+            
+            // Calculate stats
+            const customerOrders = orders.filter(o => o.customerId === currentUser.id).length;
+            const customerReviews = Math.floor(Math.random() * 10); // Simulated
+            const customerDeliveries = orders.filter(o => o.customerId === currentUser.id && o.status === 'shipped').length;
+            
+            document.getElementById('customerOrders').textContent = customerOrders;
+            document.getElementById('customerReviews').textContent = customerReviews;
+            document.getElementById('customerDeliveries').textContent = customerDeliveries;
+            
+            // Display order history
+            const orderHistory = document.getElementById('customerOrderHistory');
+            orderHistory.innerHTML = '';
+            
+            orders.filter(o => o.customerId === currentUser.id).forEach(order => {
+                const orderCard = document.createElement('div');
+                orderCard.className = 'tracking-card mb-3';
+                
+                orderCard.innerHTML = `
+                    <div class="tracking-header">
+                        <div>
+                            <div class="tracking-number">Order #${order.id}</div>
+                            <small class="text-muted">${new Date(order.date).toLocaleDateString()}</small>
+                        </div>
+                        <span class="tracking-status status-${order.status}">${order.status}</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <span>Total: ${order.total}</span>
+                        <button class="btn btn-sm btn-primary-custom" onclick="trackOrder(${order.id})">
+                            <i class="bi bi-truck"></i> Track
+                        </button>
+                    </div>
+                `;
+                
+                orderHistory.appendChild(orderCard);
+            });
+        }
+
+        function displayArtisanDashboard() {
+            document.getElementById('artisanDashboard').style.display = 'block';
+            
+            // Calculate stats
+            const artisanProducts = products.filter(p => p.artisanId === currentUser.id).length;
+            const artisanSales = Math.floor(Math.random() * 100); // Simulated
+            const artisanRevenue = artisanSales * 50; // Simulated
+            const artisanShipments = Math.floor(Math.random() * 20); // Simulated
+            
+            document.getElementById('artisanProducts').textContent = artisanProducts;
+            document.getElementById('artisanSales').textContent = artisanSales;
+            document.getElementById('artisanRevenue').textContent = `$${artisanRevenue}`;
+            document.getElementById('artisanShipments').textContent = artisanShipments;
+            
+            // Display products
+            const productsList = document.getElementById('artisanProductsList');
+            productsList.innerHTML = '';
+            
+            products.filter(p => p.artisanId === currentUser.id).forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'tracking-card mb-3';
+                
+                productCard.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5>${product.name}</h5>
+                            <p class="text-muted mb-0">Stock: ${product.stock} | Price: $${product.price}</p>
+                        </div>
+                        <div>
+                            <button class="btn btn-sm btn-outline-primary me-2" onclick="editProduct(${product.id})">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="deleteProduct(${product.id})">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                productsList.appendChild(productCard);
+            });
+            
+            // Display orders
+            const orderList = document.getElementById('artisanOrderList');
+            orderList.innerHTML = '';
+            
+            orders.forEach(order => {
+                const orderCard = document.createElement('div');
+                orderCard.className = 'tracking-card mb-3';
+                
+                orderCard.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6>Order #${order.id}</h6>
+                            <small class="text-muted">${order.items.length} items</small>
+                        </div>
+                        <span class="badge bg-warning">${order.status}</span>
+                    </div>
+                `;
+                
+                orderList.appendChild(orderCard);
+            });
+        }
+
+        function displayAdminDashboard() {
+            document.getElementById('adminDashboard').style.display = 'block';
+            
+            // Calculate stats
+            const totalUsers = artisans.length + 10; // Simulated customers
+            const totalProducts = products.length;
+            const totalOrders = orders.length;
+            const activeDeliveries = orders.filter(o => o.status === 'shipped').length;
+            
+            document.getElementById('adminUsers').textContent = totalUsers;
+            document.getElementById('adminProducts').textContent = totalProducts;
+            document.getElementById('adminOrders').textContent = totalOrders;
+            document.getElementById('adminDeliveries').textContent = activeDeliveries;
+            
+            // Display orders
+            const orderList = document.getElementById('adminOrderList');
+            orderList.innerHTML = '';
+            
+            orders.forEach(order => {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td>#${order.id}</td>
+                    <td>Customer ${order.customerId}</td>
+                    <td><span class="badge bg-warning">${order.status}</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="updateOrderStatus(${order.id})">
+                            Update
+                        </button>
+                    </td>
+                `;
+                
+                orderList.appendChild(row);
+            });
+            
+            // Display delivery tracking
+            const tracking = document.getElementById('adminDeliveryTracking');
+            tracking.innerHTML = '';
+            
+            orders.filter(o => o.status === 'shipped').forEach(order => {
+                const trackingCard = document.createElement('div');
+                trackingCard.className = 'tracking-card mb-3';
+                
+                trackingCard.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6>Order #${order.id}</h6>
+                            <small class="text-muted">In transit</small>
+                        </div>
+                        <div class="progress" style="width: 200px;">
+                            <div class="progress-bar bg-success" style="width: 60%">60%</div>
+                        </div>
+                    </div>
+                `;
+                
+                tracking.appendChild(trackingCard);
+            });
+        }
+
+        function displayConsultantDashboard() {
+            document.getElementById('consultantDashboard').style.display = 'block';
+            
+            // Calculate stats
+            const verifiedProducts = products.filter(p => p.verified).length;
+            const pendingProducts = products.filter(p => !p.verified).length;
+            const totalStories = stories.length;
+            
+            document.getElementById('consultantVerified').textContent = verifiedProducts;
+            document.getElementById('consultantPending').textContent = pendingProducts;
+            document.getElementById('consultantStories').textContent = totalStories;
+            
+            // Display pending products
+            const pendingList = document.getElementById('consultantPendingProducts');
+            pendingList.innerHTML = '';
+            
+            products.filter(p => !p.verified).forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'tracking-card mb-3';
+                
+                productCard.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5>${product.name}</h5>
+                            <p class="text-muted mb-0">by ${product.artisan}</p>
+                        </div>
+                        <div>
+                            <button class="btn btn-sm btn-success me-2" onclick="verifyProduct(${product.id})">
+                                <i class="bi bi-check-circle"></i> Verify
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="rejectProduct(${product.id})">
+                                <i class="bi bi-x-circle"></i> Reject
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                pendingList.appendChild(productCard);
+            });
+            
+            // Display stories
+            const storiesList = document.getElementById('consultantStoriesList');
+            storiesList.innerHTML = '';
+            
+            stories.forEach(story => {
+                const storyCard = document.createElement('div');
+                storyCard.className = 'tracking-card mb-3';
+                
+                storyCard.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5>${story.title}</h5>
+                            <p class="text-muted mb-0">${story.tribe}</p>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary" onclick="editStory(${story.id})">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                    </div>
+                `;
+                
+                storiesList.appendChild(storyCard);
+            });
+        }
+
+        // Product Management
+        function showProductDetails(productId) {
+            const product = products.find(p => p.id === productId);
+            const modal = new bootstrap.Modal(document.getElementById('productModal'));
+            
+            document.getElementById('productModalTitle').textContent = product.name;
+            document.getElementById('productModalBody').innerHTML = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="${product.image}" alt="${product.name}" class="img-fluid rounded">
+                    </div>
+                    <div class="col-md-6">
+                        <h4>${product.name}</h4>
+                        <p class="text-muted">by ${product.artisan} from ${product.tribe}</p>
+                        <div class="mb-3">
+                            <span class="badge bg-primary">${product.category}</span>
+                            <span class="badge bg-success">Verified</span>
+                        </div>
+                        <h3 class="text-primary mb-3">$${product.price.toFixed(2)}</h3>
+                        <p>${product.description}</p>
+                        <h5>Cultural Significance</h5>
+                        <p>${product.cultural}</p>
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="bi bi-box-seam me-2"></i>
+                            <span>Stock: ${product.stock}</span>
+                        </div>
+                        <button class="btn btn-primary-custom w-100" onclick="addToCart(${product.id})">
+                            <i class="bi bi-cart-plus-fill"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            modal.show();
+        }
+
+        function filterProducts() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('categoryFilter').value;
+            
+            let filtered = products;
+            
+            if (searchTerm) {
+                filtered = filtered.filter(p => 
+                    p.name.toLowerCase().includes(searchTerm) ||
+                    p.artisan.toLowerCase().includes(searchTerm) ||
+                    p.tribe.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            if (category) {
+                filtered = filtered.filter(p => p.category === category);
+            }
+            
+            // Display filtered products
+            const container = document.getElementById('allProducts');
+            container.innerHTML = '';
+            
+            filtered.forEach(product => {
+                const productCard = createProductCard(product);
+                container.appendChild(productCard);
+            });
+        }
+
+        function showAddProductModal() {
+            const modal = new bootstrap.Modal(document.getElementById('addProductModal'));
+            modal.show();
+        }
+
+        function addProduct(event) {
+            event.preventDefault();
+            
+            const newProduct = {
+                id: Date.now(),
+                name: document.getElementById('newProductName').value,
+                category: document.getElementById('newProductCategory').value,
+                price: parseFloat(document.getElementById('newProductPrice').value),
+                stock: parseInt(document.getElementById('newProductStock').value),
+                description: document.getElementById('newProductDescription').value,
+                cultural: document.getElementById('newProductCultural').value,
+                artisanId: currentUser.id,
+                artisan: currentUser.name,
+                tribe: currentUser.tribe,
+                verified: false,
+                image: `https://picsum.photos/seed/product${Date.now()}/400/300`
+            };
+            
+            products.push(newProduct);
+            saveData();
+            
+            bootstrap.Modal.getInstance(document.getElementById('addProductModal')).hide();
+            showToast('Product added successfully!');
+            displayArtisanDashboard();
+        }
+
+        function editProduct(productId) {
+            showToast('Edit product functionality coming soon!');
+        }
+
+        function deleteProduct(productId) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                products = products.filter(p => p.id !== productId);
+                saveData();
+                showToast('Product deleted successfully!');
+                displayArtisanDashboard();
+            }
+        }
+
+        function verifyProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            product.verified = true;
+            saveData();
+            showToast('Product verified successfully!');
+            displayConsultantDashboard();
+        }
+
+        function rejectProduct(productId) {
+            if (confirm('Are you sure you want to reject this product?')) {
+                products = products.filter(p => p.id !== productId);
+                saveData();
+                showToast('Product rejected!');
+                displayConsultantDashboard();
+            }
+        }
+
+        // Artisan Management
+        function showAddArtisanModal() {
+            const modal = new bootstrap.Modal(document.getElementById('addArtisanModal'));
+            modal.show();
+        }
+
+        function addArtisan(event) {
+            event.preventDefault();
+            
+            const newArtisan = {
+                id: Date.now(),
+                name: document.getElementById('artisanName').value,
+                tribe: document.getElementById('artisanTribe').value,
+                specialty: document.getElementById('artisanSpecialty').value,
+                experience: parseInt(document.getElementById('artisanExperience').value),
+                bio: document.getElementById('artisanBio').value,
+                location: document.getElementById('artisanLocation').value,
+                email: document.getElementById('artisanEmail').value,
+                products: 0,
+                sales: 0,
+                rating: 0
+            };
+            
+            artisans.push(newArtisan);
+            saveData();
+            
+            bootstrap.Modal.getInstance(document.getElementById('addArtisanModal')).hide();
+            showToast('Artisan added successfully!');
+            displayArtisans();
+        }
+
+        function viewArtisanProfile(artisanId) {
+            const artisan = artisans.find(a => a.id === artisanId);
+            showToast(`Viewing profile for ${artisan.name}`);
+        }
+
+        // Story Management
+        function showAddStoryModal() {
+            const modal = new bootstrap.Modal(document.getElementById('addStoryModal'));
+            
+            // Populate product dropdown
+            const productSelect = document.getElementById('storyProduct');
+            productSelect.innerHTML = '<option value="">None</option>';
+            
+            products.forEach(product => {
+                const option = document.createElement('option');
+                option.value = product.id;
+                option.textContent = product.name;
+                productSelect.appendChild(option);
+            });
+            
+            modal.show();
+        }
+
+        function addStory(event) {
+            event.preventDefault();
+            
+            const newStory = {
+                id: Date.now(),
+                title: document.getElementById('storyTitle').value,
+                tribe: document.getElementById('storyTribe').value,
+                content: document.getElementById('storyContent').value,
+                product: parseInt(document.getElementById('storyProduct').value) || null
+            };
+            
+            stories.push(newStory);
+            saveData();
+            
+            bootstrap.Modal.getInstance(document.getElementById('addStoryModal')).hide();
+            showToast('Cultural story added successfully!');
+            displayConsultantDashboard();
+        }
+
+        function editStory(storyId) {
+            showToast('Edit story functionality coming soon!');
+        }
+
+        // Order Management
+        function trackOrder(orderId) {
+            showToast(`Tracking order #${orderId}`);
+        }
+
+        function updateOrderStatus(orderId) {
+            const order = orders.find(o => o.id === orderId);
+            const statuses = ['confirmed', 'processing', 'shipped', 'delivered'];
+            const currentIndex = statuses.indexOf(order.status);
+            const nextIndex = (currentIndex + 1) % statuses.length;
+            
+            order.status = statuses[nextIndex];
+            saveData();
+            
+            showToast(`Order #${orderId} status updated to ${order.status}`);
+            displayAdminDashboard();
+        }
+
+        // Utility Functions
+        function showToast(message) {
+            const toast = document.getElementById('notificationToast');
+            document.getElementById('toastMessage').textContent = message;
+            
+            const bsToast = new bootstrap.Toast(toast);
+            bsToast.show();
+        }
+
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.scroll-animate').forEach(el => {
+                observer.observe(el);
+            });
+        }
+    </script>
+</body>
+</html>
